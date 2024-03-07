@@ -11,12 +11,6 @@ async def set_main_menu(bot: Bot):
                    description='Изменить условия рассылки информации'),
         BotCommand(command='/get_horoscope',
                    description='Что мне расскажут звезды?'),
-        BotCommand(command='/smile_me',
-                   description='Рассмеши меня'),
-        BotCommand(command='/get_weather',
-                   description='Что по погоде'),
-        BotCommand(command='/get_exchange_rate',
-                   description='Какой курс валют')
     ]
 
     await bot.set_my_commands(main_menu_commands)
