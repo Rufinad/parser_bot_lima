@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 import logging
 from aiogram import Bot, Dispatcher
 
-from handlers import user_handlers
+from handlers import user_handlers, apsched
 from keyboards.main_menu import set_main_menu
 from config_data.config import Config, load_config
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
@@ -32,6 +32,7 @@ async def main():
     redis = Redis(
         host='localhost'
     )
+
     storage = RedisStorage(redis=redis, key_builder=DefaultKeyBuilder(with_destiny=True))
     dp = Dispatcher(storage=storage)
     jobstores = {
@@ -42,14 +43,16 @@ async def main():
     }
 
     # добавляем возможность отправки сообщений по времени
-    # scheduler = ContextSchedulerDecorator(AsyncIOScheduler(timezone='Europe/Moscow', jobstores=jobstores))
-    # scheduler.ctx.add_instance(bot, declared_class=Bot)
-    # scheduler.add_job(apsched.send_message_time, trigger='date', run_date=datetime.now() + timedelta(seconds=10),
-    #                   kwargs={'request': Request, 'connector': asyncpg.pool.Pool})
-    # scheduler.add_job(apsched.send_message_cron, trigger='cron', hour='23',
-    #                   minute='24', start_date=datetime.now())
+    scheduler = ContextSchedulerDecorator(AsyncIOScheduler(timezone='Europe/Moscow', jobstores=jobstores))
+    scheduler.ctx.add_instance(bot, declared_class=Bot)
+    # scheduler.add_job(apsched.fts_time, trigger='date', run_date=datetime.now() + timedelta(seconds=10))
+    # scheduler.add_job(apsched.fts_time, trigger='cron', hour='13',
+    #                   minute='34', start_date=datetime.now())
+    scheduler.add_job(apsched.sigma_time, trigger='date', run_date=datetime.now() + timedelta(seconds=10))
+    # scheduler.add_job(apsched.sigma_time, trigger='cron', hour='13',
+    #                   minute='34', start_date=datetime.now())
 
-    # scheduler.start()
+    scheduler.start()
 
     # Регистриуем роутеры в диспетчере
     dp.include_router(user_handlers.router)

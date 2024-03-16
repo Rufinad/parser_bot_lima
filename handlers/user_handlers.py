@@ -8,7 +8,7 @@ from keyboards.inline_kb import start_keyboard
 # from handlers.apsched import send_message_cron
 from services.fts_parser import get_fts_news
 from services.sigma_parser import get_sigma_news
-from states.statesform import StartSG
+
 
 router = Router()
 
@@ -23,18 +23,23 @@ async def process_start_command(message: Message, bot: Bot, state: FSMContext):
                          reply_markup=start_keyboard)
 
 
-# @router.message(Command(commands='get_weather'))  # эта хрень работает если руками прописать /get_weather
 @router.callback_query(F.data == 'FTS')
-async def send_weather(callback: CallbackQuery):
+async def send_fts_news(callback: CallbackQuery):
     fts_data = get_fts_news()
-    # for el in fts_data:
-    #     url_text = el[1]
-    await callback.answer(fts_data)
+    if fts_data:
+        for item in fts_data:
+            await callback.message.answer(f'<a href="{item[0]}">{item[1]}</a>: {item[2]}', parse_mode=ParseMode.HTML)
+    else:
+        await callback.message.answer(text='к сожалению новых новостей с сайта https://ved.today нет')
 
 
-# @router.message(Command(commands='get_exchange_rate'))
 @router.callback_query(F.data == 'Sigma')
-async def send_rate(callback: CallbackQuery):
+async def send_sigma_news(callback: CallbackQuery):
     sigma_news = get_sigma_news()
-    await callback.answer(sigma_news)
+    if sigma_news:
+        for item in sigma_news:
+            await callback.message.answer(f'<a href="{item[0]}">{item[1]}</a>: {item[2]}', parse_mode=ParseMode.HTML)
+    else:
+        await callback.message.answer(text='к сожалению новых новостей с сайта https://www.sigma-soft.ru нет')
+
 

@@ -1,13 +1,9 @@
 from aiogram.fsm.state import StatesGroup, State
 
 
-class StepsForm(StatesGroup):
-    GET_NAME = State()
-    GET_LAST_NAME = State()
+class Parser(StatesGroup):
+    GET_NEWS = State()
 
 
-class StartSG(StatesGroup):
-    start = State()  # начало диалога
-    res = State()  # начало диалога
-    horo = State()  # диалог для выбора гороскопа
+
 

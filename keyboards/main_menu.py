@@ -8,9 +8,8 @@ async def set_main_menu(bot: Bot):
     # Создаем список с командами и их описанием для кнопки menu
     main_menu_commands = [
         BotCommand(command='/change_info',
-                   description='Изменить условия рассылки информации'),
+                   description='парсинг сайта ved.today'),
         BotCommand(command='/get_horoscope',
-                   description='Что мне расскажут звезды?'),
+                   description='парсинг сайта sigma-soft'),
     ]
-
     await bot.set_my_commands(main_menu_commands)
