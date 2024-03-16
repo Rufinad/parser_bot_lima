@@ -2,7 +2,6 @@ import asyncio
 from datetime import datetime, timedelta
 import logging
 from aiogram import Bot, Dispatcher
-
 from handlers import user_handlers, apsched
 from keyboards.main_menu import set_main_menu
 from config_data.config import Config, load_config
@@ -13,10 +12,7 @@ from apscheduler_di import ContextSchedulerDecorator
 import asyncpg
 
 
-"""цель бота отправлять мне каждое утро сообщение с погодой в Санкт-Петербурге,
-курсом доллара и евро, и еще рандомный анекдот"""
-'''цель отработать самостоятельное создание бота, парсинг сайтов, работа с api сайтов'''
-
+"""цель бота отправлять в канал сообщение с новостями, которые были получены при помощи париинга сайтов"""
 
 # Инициализируем логгер
 logger = logging.getLogger(__name__)
