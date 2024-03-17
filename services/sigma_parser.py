@@ -9,19 +9,15 @@ locale.setlocale(locale.LC_ALL, '')  # иначе русские даты не �
 
 def is_new(date: str):
     """Функция проверяет новость на новизну (сравнивает с текущей датой)"""
-    # current_date = datetime.now().strftime(' %d %b %Yг')  # cls str
-    current_date = ' 26 Янв 2024г'  # дата приведена для тестирования!!!!!
-    form_cur_date = datetime.strptime(current_date, ' %d %b %Yг')  # cls datetime
-    news_date = datetime.strptime(date, ' %d %b %Yг')  # cls datetime
+    # current_date = datetime.now().strftime('%d %B %Y')  # cls str
+    current_date = '15 марта 2024'  # дата приведена для тестирования!!!!!
+    form_cur_date = datetime.strptime(current_date, '%d %B %Y')  # cls datetime
+    news_date = datetime.strptime(date, '%d %B %Y')  # cls datetime
     if news_date >= form_cur_date:  # сравнивать можно только объекты datetime
         return True
     return False
 def get_sigma_news():
     """Функция парсит сайт и возвращает список из новостей которые еще не были отправлены"""
-    with open('/home/san/Рабочий стол/проекты на Python/parser_bot/services/sent_sigma_hrefs.txt', 'r') as file:
-        sent_sigma_hrefs = []
-        for line in file:
-            sent_sigma_hrefs.append(line.strip())
     result = []
     scheme = 'https://www.sigma-soft.ru/'
     ua = UserAgent()
@@ -34,26 +30,21 @@ def get_sigma_news():
         if response.status_code == 200:
             news = soup.find_all('a', class_=['news'])
             all_news_hrefs = [scheme + x['href'] for x in news]  # все ссылки по новостям
-            new_news_hrefs = [i for i in all_news_hrefs if i not in sent_sigma_hrefs]  # только новые новости
-            for href in new_news_hrefs:
+            for href in all_news_hrefs:
                 r = requests.get(url=href)
                 # r.encoding = 'utf-8'
                 card_soup = BeautifulSoup(r.text, 'lxml')
                 try:
-                    news_text = card_soup.find('p', attrs={'style': 'text-align: justify'}).text
-                    # Разбиваем текст на строки
-                    lines = news_text.split('\n')
-                    # Удаляем последние 3 строки
-                    new_text = '\n'.join(lines[:-3])
-                    result.append([href, new_text])
-                    sent_sigma_hrefs.extend(new_news_hrefs)
+                    date_news = card_soup.find('p', class_='color4').text
+                    if is_new(date_news):
+                        news_text = card_soup.find('p', attrs={'style': 'text-align:justify'}).text
+                        # Разбиваем текст на строки
+                        lines = news_text.split('\n')
+                        # Удаляем последние 3 строки (там где написано про оригинал новости)
+                        new_text = '\n'.join(lines[:-3])
+                        result.append([href, new_text])
                 except Exception:
                     continue
-            # print(sent_sigma_hrefs)
-            with open('sent_sigma_hrefs.txt', 'a') as file:
-                # Записываем каждый элемент списка в файл построчно
-                for item in result:  # дозаписываем в файл новости которые отправили
-                    file.write(item[0] + '\n')  # Записываем элемент и добавляем символ переноса строки
             print(result)
             return result  # список списков в котором 0 элемент ссылка, 1 новость
 
