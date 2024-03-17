@@ -12,7 +12,7 @@ from apscheduler_di import ContextSchedulerDecorator
 import asyncpg
 
 
-"""цель бота отправлять в канал сообщение с новостями, которые были получены при помощи париинга сайтов"""
+"""цель бота отправлять в канал сообщение с новостями, которые были получены при помощи парcинга сайтов"""
 
 # Инициализируем логгер
 logger = logging.getLogger(__name__)
@@ -41,10 +41,10 @@ async def main():
     # добавляем возможность отправки сообщений по времени
     scheduler = ContextSchedulerDecorator(AsyncIOScheduler(timezone='Europe/Moscow', jobstores=jobstores))
     scheduler.ctx.add_instance(bot, declared_class=Bot)
-    # scheduler.add_job(apsched.fts_time, trigger='date', run_date=datetime.now() + timedelta(seconds=10))
-    # scheduler.add_job(apsched.fts_time, trigger='cron', hour='13',
-    #                   minute='34', start_date=datetime.now())
-    scheduler.add_job(apsched.sigma_time, trigger='date', run_date=datetime.now() + timedelta(seconds=10))
+    scheduler.add_job(apsched.fts_time, trigger='date', run_date=datetime.now() + timedelta(seconds=10))
+    # scheduler.add_job(apsched.fts_time, trigger='cron', hour='19',
+    #                   minute='50', start_date=datetime.now())
+    scheduler.add_job(apsched.sigma_time, trigger='date', run_date=datetime.now() + timedelta(seconds=20))
     # scheduler.add_job(apsched.sigma_time, trigger='cron', hour='13',
     #                   minute='34', start_date=datetime.now())
 
