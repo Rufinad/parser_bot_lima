@@ -9,8 +9,8 @@ locale.setlocale(locale.LC_ALL, '')  # иначе русские даты не �
 
 def is_new(date: str):
     """Функция проверяет новость на новизну (сравнивает с текущей датой)"""
-    # current_date = datetime.now().strftime(' %d %b %Yг')  # cls str
-    current_date = ' 26 Янв 2024г'  # дата приведена для тестирования!!!!!
+    current_date = datetime.now().strftime(' %d %b %Yг')  # cls str
+    # current_date = ' 26 Янв 2024г'  # дата приведена для тестирования!!!!!
     form_cur_date = datetime.strptime(current_date, ' %d %b %Yг')  # cls datetime
     news_date = datetime.strptime(date, ' %d %b %Yг')  # cls datetime
     if news_date >= form_cur_date:  # сравнивать можно только объекты datetime

@@ -9,8 +9,8 @@ locale.setlocale(locale.LC_ALL, '')  # иначе русские даты не �
 
 def is_new(date: str):
     """Функция проверяет новость на новизну (сравнивает с текущей датой)"""
-    # current_date = datetime.now().strftime(' %d %b %Y')  # cls str
-    current_date = '15 марта 2024'  # дата приведена для тестирования!!!!!
+    current_date = datetime.now().strftime(' %d %b %Y')  # cls str
+    # current_date = '15 марта 2024'  # дата приведена для тестирования!!!!!
     form_cur_date = datetime.strptime(current_date, '%d %B %Y')  # cls datetime
     formatted_date = date.replace('a', 'а')  # ебаная таможня использует английские буквы в русских словах
     news_date = datetime.strptime(formatted_date, '%d %B %Y %H:%M')  # cls datetime
@@ -36,18 +36,16 @@ def get_custom_news():
             only_new = [x for x in all_news if is_new(x[1])]  # только новые ссылки с датами
             # print(only_new)
             for href in only_new:
-                r = requests.get(url=href[0])
-                # r.encoding = 'utf-8'
-                card_soup = BeautifulSoup(r.text, 'lxml')
-                print(card_soup)
-                news_text = card_soup.find('div', class_='pin')
-                # print(news_text)
-                # # Разбиваем текст на строки
-                # lines = news_text.split('\n')
-                # # Удаляем первые 3 строки
-                # new_text = '\n'.join(lines[3:])
-                # result.append([href[0], news_text])
-            print(result)
+                try:
+                    r = requests.get(url=href[0])
+                    # r.encoding = 'utf-8'
+                    card_soup = BeautifulSoup(r.text, 'lxml')
+                    print(card_soup)
+                    news_text = card_soup.find('div', class_='pin')
+                    # print(news_text)
+                    result.append([href[0], news_text])
+                except Exception:
+                    continue
             return result
 
 
