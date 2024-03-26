@@ -29,5 +29,5 @@ async def custom_time(bot: Bot):
     custom_data = get_custom_news()
     if custom_data:
         for item in custom_data:
-            await bot.send_message(chat_id='-1002043299400', text=f'<a href="{item[0]}">СИГМА-СОФТ</a>: {item[1]}',
+            await bot.send_message(chat_id='-1002043299400', text=f'<a href="{item[0]}">CUSTOM-GOV</a>: {item[1]}',
                                    disable_web_page_preview=True)

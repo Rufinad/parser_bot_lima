@@ -10,7 +10,7 @@ locale.setlocale(locale.LC_ALL, '')  # иначе русские даты не �
 def is_new(date: str):
     """Функция проверяет новость на новизну (сравнивает с текущей датой)"""
     current_date = datetime.now().strftime('%d %B %Y')  # cls str
-    # current_date = '15 марта 2024'  # дата приведена для тестирования!!!!!
+    current_date = '26 марта 2024'  # дата приведена для тестирования!!!!!
     form_cur_date = datetime.strptime(current_date, '%d %B %Y')  # cls datetime
     news_date = datetime.strptime(date, '%d %B %Y')  # cls datetime
     if news_date >= form_cur_date:  # сравнивать можно только объекты datetime
@@ -45,7 +45,7 @@ def get_sigma_news():
                         result.append([href, new_text])
                 except Exception:
                     continue
-            print(result)
+            # print(result)
             return result  # список списков в котором 0 элемент ссылка, 1 новость
 
 

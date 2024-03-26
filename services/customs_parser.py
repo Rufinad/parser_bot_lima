@@ -9,8 +9,8 @@ locale.setlocale(locale.LC_ALL, '')  # иначе русские даты не �
 
 def is_new(date: str):
     """Функция проверяет новость на новизну (сравнивает с текущей датой)"""
-    current_date = datetime.now().strftime(' %d %b %Y')  # cls str
-    # current_date = '15 марта 2024'  # дата приведена для тестирования!!!!!
+    # current_date = datetime.now().strftime('%d %B %Y')  # cls str
+    current_date = '26 марта 2024'  # дата приведена для тестирования!!!!!
     form_cur_date = datetime.strptime(current_date, '%d %B %Y')  # cls datetime
     formatted_date = date.replace('a', 'а')  # ебаная таможня использует английские буквы в русских словах
     news_date = datetime.strptime(formatted_date, '%d %B %Y %H:%M')  # cls datetime
@@ -29,12 +29,16 @@ def get_custom_news():
         response.encoding = 'utf-8'
         soup = BeautifulSoup(response.text, 'lxml')
         if response.status_code == 200:
+            top_news = soup.find_all('div', class_=['list-news__header'])
+            top_news_datetime = soup.find('div', class_='list-news__big-data').text.strip()
+            top_news_href = [x.find('a')['href'] for x in top_news]
             all_news = soup.find_all('div', class_=['list-news__item'])
             all_news_datetime = [x.find('div', class_='list-news__item-data').text.strip() for x in all_news]
             all_news_hrefs = [x.find('a')['href'] for x in all_news]  # все ссылки на новости
             all_news = [list(a) for a in zip(all_news_hrefs, all_news_datetime)]  # ссылка-дата
             only_new = [x for x in all_news if is_new(x[1])]  # только новые ссылки с датами
-            # print(only_new)
+            only_new.extend([top_news_href, top_news_datetime])
+            print(only_new)
             for href in only_new:
                 try:
                     r = requests.get(url=href[0])
@@ -46,6 +50,7 @@ def get_custom_news():
                     result.append([href[0], news_text])
                 except Exception:
                     continue
+            print(result)
             return result
 
 
