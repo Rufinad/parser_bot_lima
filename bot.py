@@ -26,9 +26,8 @@ async def main():
     dp = Dispatcher()
     # создадим хранилище с помощью Redis и передадим в диспетчер
     redis = Redis(
-        host='localhost'
+        host='redis'
     )
-
     storage = RedisStorage(redis=redis, key_builder=DefaultKeyBuilder(with_destiny=True))
     dp = Dispatcher(storage=storage)
     jobstores = {
@@ -44,12 +43,12 @@ async def main():
     scheduler.add_job(apsched.fts_time, trigger='date', run_date=datetime.now() + timedelta(seconds=10))
     scheduler.add_job(apsched.sigma_time, trigger='date', run_date=datetime.now() + timedelta(seconds=20))
     scheduler.add_job(apsched.custom_time, trigger='date', run_date=datetime.now() + timedelta(seconds=10))
-    # scheduler.add_job(apsched.sigma_time, trigger='cron', hour='13',
-    #                   minute='00', start_date=datetime.now())
-    # scheduler.add_job(apsched.custom_time, trigger='cron', hour='08',
-    #                   minute='00', start_date=datetime.now())
-    # scheduler.add_job(apsched.fts_time, trigger='cron', hour='19',
-    #                   minute='00', start_date=datetime.now())
+    scheduler.add_job(apsched.sigma_time, trigger='cron', hour='13',
+                      minute='00', start_date=datetime.now())
+    scheduler.add_job(apsched.custom_time, trigger='cron', hour='08',
+                      minute='00', start_date=datetime.now())
+    scheduler.add_job(apsched.fts_time, trigger='cron', hour='19',
+                      minute='00', start_date=datetime.now())
 
     scheduler.start()
 

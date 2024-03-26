@@ -38,19 +38,16 @@ def get_custom_news():
             all_news = [list(a) for a in zip(all_news_hrefs, all_news_datetime)]  # ссылка-дата
             only_new = [x for x in all_news if is_new(x[1])]  # только новые ссылки с датами
             only_new.extend([top_news_href, top_news_datetime])
-            print(only_new)
             for href in only_new:
                 try:
                     r = requests.get(url=href[0])
                     # r.encoding = 'utf-8'
                     card_soup = BeautifulSoup(r.text, 'lxml')
-                    print(card_soup)
                     news_text = card_soup.find('div', class_='pin')
                     # print(news_text)
                     result.append([href[0], news_text])
                 except Exception:
                     continue
-            print(result)
             return result
 
 

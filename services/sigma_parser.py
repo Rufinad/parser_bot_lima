@@ -36,7 +36,6 @@ def get_sigma_news():
                 card_soup = BeautifulSoup(r.text, 'lxml')
                 try:
                     date_news = card_soup.find('p', class_='color4').text
-                    print(date_news)
                     if is_new(date_news):
                         news_text = card_soup.find('p', attrs={'style': 'text-align: justify'}).text
                         # print(news_text)
@@ -47,7 +46,6 @@ def get_sigma_news():
                         result.append([href, new_text])
                 except Exception:
                     continue
-            print(result)
             return result  # список списков в котором 0 элемент ссылка, 1 новость
 
 
