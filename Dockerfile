@@ -5,7 +5,5 @@ WORKDIR /bot
 COPY requirements.txt .
 COPY . /bot
 RUN pip install --no-cache -r /bot/requirements.txt
-RUN apt-get install redis-server
-RUN service redis-server restart
 CMD ["python", "-m", "bot"]
 
