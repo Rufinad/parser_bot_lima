@@ -4,7 +4,8 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /bot
 COPY requirements.txt .
 COPY . /bot
-RUN pip  --no-cache -r /bot/requirements.txt && sudo apt-get redis-server \
-    && sudo apt-get  redis-server && service sudo redis-server restart
+RUN pip  --no-cache -r /bot/requirements.txt
+RUN apt-get install redis-server
+RUN service redis-server restart
 CMD ["python", "-m", "bot"]
 
