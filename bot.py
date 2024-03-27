@@ -42,7 +42,7 @@ async def main():
     scheduler.ctx.add_instance(bot, declared_class=Bot)
     scheduler.add_job(apsched.fts_time, trigger='date', run_date=datetime.now() + timedelta(seconds=10))
     scheduler.add_job(apsched.sigma_time, trigger='date', run_date=datetime.now() + timedelta(seconds=20))
-    scheduler.add_job(apsched.custom_time, trigger='date', run_date=datetime.now() + timedelta(seconds=10))
+    scheduler.add_job(apsched.custom_time, trigger='date', run_date=datetime.now() + timedelta(seconds=30))
     scheduler.add_job(apsched.sigma_time, trigger='cron', hour='13',
                       minute='00', start_date=datetime.now())
     scheduler.add_job(apsched.custom_time, trigger='cron', hour='08',
