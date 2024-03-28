@@ -1,0 +1,17 @@
+[Unit]
+Description=Parser_bot
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/san/parser_bot
+ExecStart=/home/san/parser_bot/venv/bin/python -m bot
+Environment=BOT_TOKEN=6568705340:AAGfA4w1DUdv-3FTxBr0czihyU6Q5D5jCzE
+User=user
+Group=user
+KillMode=process
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
