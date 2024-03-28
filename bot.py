@@ -30,16 +30,11 @@ async def main():
         key_builder=DefaultKeyBuilder(with_destiny=True, with_bot_id=True),
     )
 
-    # redis = Redis(
-    #     host='redis'
-    # )
-    # redis_storage = RedisStorage(redis=redis, key_builder=DefaultKeyBuilder(with_destiny=True))
     dp = Dispatcher(storage=redis_storage)
     jobstores = {
         'default': RedisJobStore(jobs_key='dispatched_trips_jobs',
                                  run_times_key='dispatched_trips_running',
-                                 host='redis',
-                                 port=6379)
+                                 )
     }
 
     # добавляем возможность отправки сообщений по времени
