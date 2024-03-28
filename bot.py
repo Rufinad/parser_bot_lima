@@ -25,11 +25,16 @@ async def main():
     bot = Bot(token=config.tg_bot.token, parse_mode='HTML')
     dp = Dispatcher()
     # создадим хранилище с помощью Redis и передадим в диспетчер
-    redis = Redis(
-        host='redis'
+    redis_storage = RedisStorage.from_url(
+        url='redis://redis:6379/1',
+        key_builder=DefaultKeyBuilder(with_destiny=True, with_bot_id=True),
     )
-    storage = RedisStorage(redis=redis, key_builder=DefaultKeyBuilder(with_destiny=True))
-    dp = Dispatcher(storage=storage)
+
+    # redis = Redis(
+    #     host='redis'
+    # )
+    # redis_storage = RedisStorage(redis=redis, key_builder=DefaultKeyBuilder(with_destiny=True))
+    dp = Dispatcher(storage=redis_storage)
     jobstores = {
         'default': RedisJobStore(jobs_key='dispatched_trips_jobs',
                                  run_times_key='dispatched_trips_running',
