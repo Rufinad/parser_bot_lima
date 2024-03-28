@@ -26,7 +26,7 @@ async def main():
     dp = Dispatcher()
     # создадим хранилище с помощью Redis и передадим в диспетчер
     redis_storage = RedisStorage.from_url(
-        url='redis://redis:6379/1',
+        url='redis://localhost:6379/0',
         key_builder=DefaultKeyBuilder(with_destiny=True, with_bot_id=True),
     )
 
@@ -54,16 +54,6 @@ async def main():
 
     # Регистриуем роутеры в диспетчере
     dp.include_router(user_handlers.router)
-    # dp.include_router(form.router)
-    # dp.include_router(handlers.router)
-    # dp.include_router(info_type_dialog)
-
-
-    # setup_dialogs(dp)
-
-    # dp.message.middleware.register(OfficeHoursMiddleware())
-    # dp.update.middleware.register(SchedulerMiddleware(scheduler))
-    # dp.update.middleware.register(DbSession(pool_connect))
 
     # Конфигурируем логирование
     logging.basicConfig(
