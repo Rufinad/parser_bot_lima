@@ -4,11 +4,10 @@ from bs4 import BeautifulSoup
 import requests
 from fake_useragent import UserAgent
 
-locale.setlocale(locale.LC_ALL, '')  # иначе русские даты не пашут
-
 
 def is_new(date: str):
     """Функция проверяет новость на новизну (сравнивает с текущей датой)"""
+    locale.setlocale(locale.LC_ALL, '')  # иначе русские даты не пашут
     # current_date = datetime.now().strftime('%d %B %Y')  # cls str
     current_date = '26 марта 2024'  # дата приведена для тестирования!!!!!
     form_cur_date = datetime.strptime(current_date, '%d %B %Y')  # cls datetime
