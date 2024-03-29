@@ -28,7 +28,8 @@ async def send_fts_news(callback: CallbackQuery):
     fts_data = get_fts_news()
     if fts_data:
         for item in fts_data:
-            await callback.message.answer(f'<a href="{item[0]}">{item[1]}</a>: {item[2]}', parse_mode=ParseMode.HTML)
+            await callback.send_message(chat_id='-1002043299400', text=f'<a href="{item[0]}">VED-TODAY</a>: {item[1]}',
+                                   disable_web_page_preview=True)
     else:
         await callback.message.answer(text='к сожалению новых новостей с сайта https://ved.today нет')
 
@@ -38,7 +39,8 @@ async def send_sigma_news(callback: CallbackQuery):
     sigma_news = get_sigma_news()
     if sigma_news:
         for item in sigma_news:
-            await callback.message.answer(f'<a href="{item[0]}">{item[1]}</a>: {item[2]}', parse_mode=ParseMode.HTML)
+            await callback.send_message(chat_id='-1002043299400', text=f'<a href="{item[0]}">СИГМА-СОФТ</a>: {item[1]}',
+                                   disable_web_page_preview=True)
     else:
         await callback.message.answer(text='к сожалению новых новостей с сайта https://www.sigma-soft.ru нет')
 
