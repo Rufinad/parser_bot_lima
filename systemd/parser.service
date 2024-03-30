@@ -7,7 +7,7 @@ After=network.target
 Type=simple
 WorkingDirectory=/home/san/parser_bot
 ExecStart=/home/san/parser_bot/venv/bin/python3 /home/san/parser_bot/bot.py
-Environment=BOT_TOKEN=1133423659:AAEmZFdkBs9xM_qiclC7vw9G4wU9hOq0m0Y
+Environment=BOT_TOKEN=
 User=san
 KillMode=process
 Restart=on-failure
