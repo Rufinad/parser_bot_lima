@@ -40,14 +40,14 @@ async def main():
     # добавляем возможность отправки сообщений по времени
     scheduler = ContextSchedulerDecorator(AsyncIOScheduler(timezone='Europe/Moscow', jobstores=jobstores))
     scheduler.ctx.add_instance(bot, declared_class=Bot)
-    scheduler.add_job(apsched.fts_time, trigger='date', run_date=datetime.now() + timedelta(seconds=10))
-    scheduler.add_job(apsched.sigma_time, trigger='date', run_date=datetime.now() + timedelta(seconds=20))
-    scheduler.add_job(apsched.custom_time, trigger='date', run_date=datetime.now() + timedelta(seconds=30))
+    # scheduler.add_job(apsched.fts_time, trigger='date', run_date=datetime.now() + timedelta(seconds=10))
+    # scheduler.add_job(apsched.sigma_time, trigger='date', run_date=datetime.now() + timedelta(seconds=10))
+    # scheduler.add_job(apsched.custom_time, trigger='date', run_date=datetime.now() + timedelta(seconds=10))
     scheduler.add_job(apsched.sigma_time, trigger='cron', hour='13',
                       minute='00', start_date=datetime.now())
-    scheduler.add_job(apsched.custom_time, trigger='cron', hour='08',
+    scheduler.add_job(apsched.custom_time, trigger='cron', hour='18',
                       minute='00', start_date=datetime.now())
-    scheduler.add_job(apsched.fts_time, trigger='cron', hour='19',
+    scheduler.add_job(apsched.fts_time, trigger='cron', hour='20',
                       minute='00', start_date=datetime.now())
 
     scheduler.start()
@@ -68,7 +68,6 @@ async def main():
     await set_main_menu(bot)
 
     # Запускаем бота и пропускаем все накопленные входящие
-    # Да, этот метод можно вызвать даже если у вас поллинг
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
 
