@@ -44,7 +44,7 @@ def get_custom_news():
     url = 'https://customs.gov.ru/press/federal'
     result = []
     with requests.Session() as s:
-        response = s.get(url, headers=headers, cookies=cookie_dict)
+        response = s.get(url, headers=headers)
         response.encoding = 'utf-8'
         soup = BeautifulSoup(response.text, 'lxml')
         if response.status_code == 200:
@@ -60,7 +60,7 @@ def get_custom_news():
             time.sleep(2)
             for href in only_new:
                 try:
-                    r = requests.get(url=href[0])
+                    r = requests.get(url=href[0], headers=headers)
                     time.sleep(random.randint(3, 7))
                     # r.encoding = 'utf-8'
                     card_soup = BeautifulSoup(r.text, 'lxml')

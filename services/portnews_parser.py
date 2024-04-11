@@ -37,14 +37,15 @@ def get_fts_news():
             only_new = [x for x in all_news if is_new(x[1])]  # только новые ссылки с датами
             # print(only_new)
             for href in only_new:
-                r = requests.get(url=href[0])
+                r = requests.get(url=href[0], headers=headers)
                 # r.encoding = 'utf-8'
                 card_soup = BeautifulSoup(r.text, 'lxml')
-                print(card_soup)
+                # print(card_soup)
                 try:
-                    news_text_lst = card_soup.find_all('p', attrs={'style': 'text-align: justify'})
-                    print(news_text_lst)
-                    news_text_row = '\n'.join(news_text_lst)
+                    news_lst = card_soup.find_all('p', attrs={'style': 'text-align: justify;'})
+                    news_text = [x.text for x in news_lst]
+                    print(news_text)
+                    news_text_row = '\n'.join(news_text)
                     result.append([href[0], news_text_row])
                 except Exception:
                     continue
