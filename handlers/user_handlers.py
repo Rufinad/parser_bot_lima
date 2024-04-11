@@ -5,8 +5,10 @@ from aiogram.filters import Command, CommandStart
 from aiogram.enums import ParseMode
 
 from keyboards.inline_kb import start_keyboard
+from services.customs_parser import get_custom_news
 # from handlers.apsched import send_message_cron
 from services.fts_parser import get_fts_news
+from services.portnews_parser import get_portnews
 from services.sigma_parser import get_sigma_news
 
 
@@ -45,3 +47,23 @@ async def send_sigma_news(callback: CallbackQuery):
         await callback.message.answer(text='к сожалению новых новостей с сайта https://www.sigma-soft.ru нет')
 
 
+@router.callback_query(F.data == 'Portnews')
+async def send_portnews(callback: CallbackQuery):
+    portnews_data = get_portnews()
+    if portnews_data:
+        for item in portnews_data:
+            await callback.message.answer(text=f'<a href="{item[0]}">PORTNEWS</a>: {item[1]}',
+                                   disable_web_page_preview=True)
+    else:
+        await callback.message.answer(text='к сожалению новых новостей с сайта https://www.portnews.ru нет')
+
+
+@router.callback_query(F.data == 'Custom')
+async def send_portnews(callback: CallbackQuery):
+    custom_data = get_custom_news()
+    if custom_data:
+        for item in custom_data:
+            await callback.message.answer(text=f'<a href="{item[0]}">CUSTOM-GOV</a>: {item[1]}',
+                                   disable_web_page_preview=True)
+    else:
+        await callback.message.answer(text='к сожалению новых новостей с сайта https://www.portnews.ru нет')

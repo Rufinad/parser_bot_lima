@@ -18,7 +18,7 @@ def is_new(date: str):
     return False
 
 
-def get_fts_news():
+def get_portnews():
     ua = UserAgent()
     headers = {'User-Agent': ua.chrome}
     scheme = 'https://portnews.ru'
@@ -54,4 +54,4 @@ def get_fts_news():
 
 
 if __name__ == '__main__':
-    get_fts_news()
+    get_portnews()

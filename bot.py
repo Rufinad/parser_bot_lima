@@ -43,11 +43,13 @@ async def main():
     # scheduler.add_job(apsched.fts_time, trigger='date', run_date=datetime.now() + timedelta(seconds=10))
     # scheduler.add_job(apsched.sigma_time, trigger='date', run_date=datetime.now() + timedelta(seconds=10))
     # scheduler.add_job(apsched.custom_time, trigger='date', run_date=datetime.now() + timedelta(seconds=10))
-    scheduler.add_job(apsched.sigma_time, trigger='cron', hour='13',
+    scheduler.add_job(apsched.sigma_time, trigger='cron', hour='17',
                       minute='00', start_date=datetime.now())
     scheduler.add_job(apsched.custom_time, trigger='cron', hour='18',
                       minute='00', start_date=datetime.now())
     scheduler.add_job(apsched.fts_time, trigger='cron', hour='20',
+                      minute='00', start_date=datetime.now())
+    scheduler.add_job(apsched.portnews_time, trigger='cron', hour='19',
                       minute='00', start_date=datetime.now())
 
     scheduler.start()
