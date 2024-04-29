@@ -1,6 +1,6 @@
 from aiogram import Bot
 
-from services.customs_parser import get_custom_news
+from services.lima_parser_man import get_custom_news
 from services.fts_parser import get_fts_news
 from services.portnews_parser import get_portnews
 from services.sigma_parser import get_sigma_news

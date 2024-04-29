@@ -5,7 +5,7 @@ from aiogram.filters import Command, CommandStart
 from aiogram.enums import ParseMode
 
 from keyboards.inline_kb import start_keyboard
-from services.customs_parser import get_custom_news
+from services.lima_parser_man import get_custom_news
 # from handlers.apsched import send_message_cron
 from services.fts_parser import get_fts_news
 from services.portnews_parser import get_portnews
