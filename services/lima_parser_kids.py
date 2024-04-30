@@ -43,9 +43,10 @@ def decode_unicode(obj):
         return obj
 
 
-decoded_data = decode_unicode(data)
+decoded_data_kids = decode_unicode(data)
+# print(decoded_data)
 
-print(json.dumps(decoded_data, ensure_ascii=False, indent=2))
+# print(json.dumps(decoded_data, ensure_ascii=False, indent=2))
 
 
 '''
