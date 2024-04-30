@@ -20,28 +20,28 @@ async def command_start_process(message: Message, dialog_manager: DialogManager)
 # этот хендлер переключит состояние на выбор размера верха и запишет в диалог дату, что выбран мужик
 async def for_man(callback: CallbackQuery, button: Button, dialog_manager: DialogManager):
     dialog_manager.dialog_data['type'] = 'man'
-    await dialog_manager.start(state=StepsForm.GET_TOP_SIZE)
+    await dialog_manager.switch_to(state=StepsForm.GET_TOP_SIZE)
 
 
 # этот хендлер переключит состояние на выбор размера низа и запишет размер верха
 async def get_top_size(callback: CallbackQuery, widget: Select, dialog_manager: DialogManager, item_id: str):
     dialog_manager.dialog_data['top_size'] = item_id
     print(f'размер верха {item_id}')
-    await dialog_manager.start(state=StepsForm.GET_LOWER_SIZE)
+    await dialog_manager.switch_to(state=StepsForm.GET_LOWER_SIZE)
 
 
 # этот хендлер переключит состояние на выбор фасона и запишет размер низа
 async def get_lower_size(callback: CallbackQuery, widget: Select, dialog_manager: DialogManager, item_id: str):
     dialog_manager.dialog_data['lower_size'] = item_id
     print(f'размер низа {item_id}')
-    await dialog_manager.start(state=StepsForm.GET_STYLE)
+    await dialog_manager.switch_to(state=StepsForm.GET_STYLE)
 
 
 # этот хендлер переключит состояние на выбор события и запишет фасон
 async def get_style(callback: CallbackQuery, widget: Select, dialog_manager: DialogManager, item_id: str):
     dialog_manager.dialog_data['style'] = item_id
     print(f'фасон {item_id}')
-    await dialog_manager.start(state=StepsForm.GET_EVENT)
+    await dialog_manager.switch_to(state=StepsForm.GET_EVENT)
 
 
 # этот хендлер переключит состояние на предоставление ссылок на товары и запишет на какое событие подбираем шмотки
