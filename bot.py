@@ -23,15 +23,8 @@ async def main():
     # Инициализируем бот и диспетчер
     bot = Bot(token=config.tg_bot.token, parse_mode='HTML')
     dp = Dispatcher()
-    # создадим хранилище с помощью Redis и передадим в диспетчер
-    # redis_storage = RedisStorage.from_url(
-    #     url='redis://localhost:6379/0',
-    #     key_builder=DefaultKeyBuilder(with_destiny=True, with_bot_id=True),
-    # )
-    #
-    # dp = Dispatcher(storage=redis_storage)
 
-    # Регистриуем роутеры в диспетчере
+    # Регистрируем роутеры в диспетчере
     dp.include_router(bot_dialogs.handlers.router)
     dp.include_router(start_dialog)
     setup_dialogs(dp)
