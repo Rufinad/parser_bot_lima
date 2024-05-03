@@ -45,7 +45,7 @@ def decode_unicode(obj):
 
 decoded_data_man = decode_unicode(data)
 
-print(json.dumps(decoded_data, ensure_ascii=False, indent=2))
+print(json.dumps(decoded_data_man, ensure_ascii=False, indent=2))
 
 '''
 "/home/san/Рабочий стол/freelance/parser_bot_lima/venv/bin/python" /home/san/Рабочий стол/freelance/parser_bot_lima/services/lima_parser_man.py 

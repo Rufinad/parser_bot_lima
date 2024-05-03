@@ -66,10 +66,19 @@ async def select_woman_appearance(callback: CallbackQuery, widget: Select, dialo
 async def select_event(callback: CallbackQuery, widget: Select, dialog_manager: DialogManager, item_id: str):
     selected_event = dialog_manager.dialog_data['event'][int(item_id)-1][0]
     dialog_manager.dialog_data['sel_event'] = selected_event
-    await callback.message.answer(text=f'Определены параметры для поиска!'
-                                       f' Ищем одежду: {dialog_manager.dialog_data["sel_sex"]}, '
-                                       f' размер верха: {dialog_manager.dialog_data["top_size"]}, '
-                                  f'размер низа: {dialog_manager.dialog_data["lower_size"]}, '
-                                  f'фасон: {dialog_manager.dialog_data["sel_style"]},'
-                                       f' событие: {dialog_manager.dialog_data["sel_event"]}')
-    # await dialog_manager.switch_to(state=StepsForm.GET_LINKS)
+    if dialog_manager.dialog_data['sel_sex'] == 'для женщины':
+        await callback.message.answer(text=f'Определены параметры для поиска!'
+                                           f' Ищем одежду: {dialog_manager.dialog_data["sel_sex"]}, '
+                                           f' размер верха: {dialog_manager.dialog_data["top_size"]}, '
+                                      f'размер низа: {dialog_manager.dialog_data["lower_size"]}, '
+                                      f'фасон: {dialog_manager.dialog_data["sel_style"]}, '
+                                      f'образ: {dialog_manager.dialog_data["sel_woman_appearance"]},'
+                                      f' событие: {dialog_manager.dialog_data["sel_event"]}')
+    else:
+        await callback.message.answer(text=f'Определены параметры для поиска!'
+                                           f' Ищем одежду: {dialog_manager.dialog_data["sel_sex"]}, '
+                                           f' размер верха: {dialog_manager.dialog_data["top_size"]}, '
+                                      f'размер низа: {dialog_manager.dialog_data["lower_size"]}, '
+                                      f'фасон: {dialog_manager.dialog_data["sel_style"]},'
+                                           f' событие: {dialog_manager.dialog_data["sel_event"]}')
+    await dialog_manager.switch_to(state=StepsForm.GET_LINKS)
