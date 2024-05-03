@@ -57,6 +57,15 @@ async def get_woman_appearance(dialog_manager: DialogManager, **kwargs):
     return {'woman_appearance': woman_appearance}
 
 
+async def get_woman_appearance_holiday(dialog_manager: DialogManager, **kwargs):
+    woman_appearance = [
+        ('с юбкой', 1),
+        ('с брюками', 2),
+        ('с платьем', 3)
+    ]
+    dialog_manager.dialog_data['woman_appearance'] = woman_appearance
+    return {'woman_appearance': woman_appearance}
+
 async def get_event_selections(dialog_manager: DialogManager, **kwargs):
     event = [
         ('в офис', 1),
