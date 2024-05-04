@@ -1,7 +1,17 @@
+import json
+from services.decode_unicode import decode_unicode
+from services.hrefs_parser import get_hrefs
+from typing import Dict
 from aiogram.types import CallbackQuery
 from aiogram_dialog import StartMode, DialogManager
 from aiogram_dialog import Dialog, DialogManager, StartMode, Window, setup_dialogs
-
+import random
+import time
+from datetime import datetime
+import locale
+from bs4 import BeautifulSoup
+import requests
+from fake_useragent import UserAgent
 
 # async def username_getter(dialog_manager: DialogManager, event_from_user, **kwargs):
 #     return {'username': event_from_user.username}
@@ -73,3 +83,45 @@ async def get_event_selections(dialog_manager: DialogManager, **kwargs):
     ]
     dialog_manager.dialog_data['event'] = event
     return {'event': event}
+
+
+def get_href_product(url):
+    payload = ""
+    headers = {
+        "authority": "lime-shop.com",
+        "accept": "application/json",
+        "accept-language": "ru,en;q=0.9",
+        "cache-control": "no-cache",
+        "cookie": "l_locale=ru; _ga=GA1.2.1898477944.1714251822; l_region=ru; l-accept-cookies=true; roistat_visit=65274474; roistat_first_visit=65274474; roistat_visit_cookie_expire=1209600; _tt_enable_cookie=1; _ttp=85uLKVbLWNga190rdHSCLu3IA5u; ___dc=c702cd04-4b8a-42f3-b686-f2f9818f64fd; roistat_call_tracking=1; roistat_emailtracking_email=null; roistat_emailtracking_tracking_email=null; roistat_emailtracking_emails=null; l_kind=men; _gid=GA1.2.2115208036.1714370114; roistat_cookies_to_resave=roistat_ab%2Croistat_ab_submit%2Croistat_call_tracking%2Croistat_emailtracking_email%2Croistat_emailtracking_tracking_email%2Croistat_emailtracking_emails; _gat_UA-107774222-1=1",
+        "pragma": "no-cache",
+        "referer": "https://lime-shop.com/ru_ru",
+        "sec-ch-ua": '"Chromium";v="122", "Not(A:Brand";v="24", "YaBrowser";v="24.4", "Yowser";v="2.5"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": '"Windows"',
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-origin",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 YaBrowser/24.4.0.0 Safari/537.36",
+        "uuid": "ddd011c9-30c8-4a13-9172-82a44721e7dd",
+        "x-frontend-version": "1.5.0",
+        "x-lang": "ru",
+        "x-requested-with": "XMLHttpRequest",
+        "x-site": "ru"
+    }
+    response = requests.request("GET", url, data=payload, headers=headers)
+    json_data = response.text
+    data = json.loads(json_data)
+    decoded_data = decode_unicode(data)
+    random_href = get_hrefs(decoded_data)
+    print(random_href)
+    return random_href
+
+
+async def get_midi_ubka(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/skirts_midi')
+    return {'url_midi_ub': random_href}
+
+
+async def get_woman_shirts(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/shirts')
+    return {'url2': random_href}

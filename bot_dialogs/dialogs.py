@@ -5,7 +5,8 @@ from aiogram_dialog import Dialog, DialogManager, StartMode, Window, setup_dialo
 from aiogram_dialog.widgets.text import Const, Format, List, Multi, Case, Jinja
 from aiogram_dialog.widgets.kbd import Button, Row, ManagedMultiselect, Column, Group, Select, Url
 from bot_dialogs.getters import get_size_selections, get_man_style_selections, get_event_selections, \
-    get_sex, get_woman_style_selections, get_woman_appearance, get_woman_appearance_holiday
+    get_sex, get_woman_style_selections, get_woman_appearance, get_woman_appearance_holiday, get_midi_ubka, \
+    get_woman_shirts
 
 start_dialog = Dialog(
     Window(
@@ -115,10 +116,10 @@ start_dialog = Dialog(
     Window(
         Const('Результат работы искусственного интеллекта 👇'),
         Url(text=Const('Миди юбки'),
-            url=Const('https://lime-shop.com/ru_ru/catalog/skirts_midi'),
+            url=Format('{url}'),
             id='button_1_2'),
         Url(text=Const('Рубашки'),
-            url=Const('https://lime-shop.com/ru_ru/catalog/shirts'),
+            url=Format('{url2}'),
             id='button_1_3'),
         Url(text=Const('Блузы'),
             url=Const('https://lime-shop.com/ru_ru/catalog/blouses'),
@@ -133,6 +134,7 @@ start_dialog = Dialog(
                id='restart',
                on_click=restart_search
                ),
+        getter=(get_midi_ubka, get_woman_shirts),
         state=StepsForm.VAR_1,
     ),
     Window(
