@@ -117,11 +117,111 @@ def get_href_product(url):
     return random_href
 
 
-async def get_midi_ubka(dialog_manager: DialogManager, **kwargs):
+async def get_woman_skirts_midi(dialog_manager: DialogManager, **kwargs):
     random_href = get_href_product('https://lime-shop.com/api/section/skirts_midi')
-    return {'url_midi_ub': random_href}
+    return {'skirts_midi': random_href}
 
 
 async def get_woman_shirts(dialog_manager: DialogManager, **kwargs):
     random_href = get_href_product('https://lime-shop.com/api/section/shirts')
-    return {'url2': random_href}
+    return {'shirts': random_href}
+
+
+async def get_woman_blouses(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/blouses')
+    return {'blouses': random_href}
+
+
+async def get_woman_bracelets(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/bracelets')
+    return {'bracelets': random_href}
+
+
+async def get_woman_basic_tops(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/basic_tops')
+    return {'basic_tops': random_href}
+
+
+async def get_woman_trousers_straight(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/trousers_straight')
+    return {'trousers_straight': random_href}
+
+
+async def get_woman_bryuki_flares(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/bryuki_flares')
+    return {'bryuki_flares': random_href}
+
+
+async def get_woman_dzhinsy_flare_and_bootcut(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/dzhinsy_flare_and_bootcut')
+    return {'dzhinsy_flare_and_bootcut': random_href}
+
+
+async def get_woman_dresses_mini(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/dresses_mini')
+    return {'dresses_mini': random_href}
+
+
+async def get_woman_skirts_maxi(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/skirts_maxi')
+    return {'skirts_maxi': random_href}
+
+
+async def get_woman_bryuki_loose_fitting(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/bryuki_loose_fitting')
+    return {'bryuki_loose_fitting': random_href}
+
+
+async def get_woman_trousers_darted(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/trousers_darted')
+    return {'trousers_darted': random_href}
+
+
+async def get_woman_blazers_double_breasted(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/blazers_double_breasted')
+    return {'blazers_double_breasted': random_href}
+
+
+async def get_woman_dzhinsy_wide_leg(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/dzhinsy_wide_leg')
+    return {'dzhinsy_wide_leg': random_href}
+
+
+async def get_woman_dresses_maxi(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/dresses_maxi')
+    return {'dresses_maxi': random_href}
+
+
+async def get_man_men_trousers_classic(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/men_trousers_classic')
+    return {'men_trousers_classic': random_href}
+
+
+async def get_man_men_shirts_formal(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/men_shirts_formal')
+    return {'men_shirts_formal': random_href}
+
+
+async def get_man_men_blazers(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/men_blazers')
+    return {'men_blazers': random_href}
+
+
+async def get_man_men_trousers_chino(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/men_trousers_chino')
+    return {'men_trousers_chino': random_href}
+
+
+async def get_man_men_shirts_short_sleeve(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/men_shirts_short_sleeve')
+    return {'men_shirts_short_sleeve': random_href}
+
+
+async def get_man_men_trousers_loose_fitting(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/men_trousers_loose_fitting')
+    return {'men_trousers_loose_fitting': random_href}
+
+
+async def get_man_men_shirts_linen(dialog_manager: DialogManager, **kwargs):
+    random_href = get_href_product('https://lime-shop.com/api/section/men_shirts_linen')
+    return {'men_shirts_linen': random_href}

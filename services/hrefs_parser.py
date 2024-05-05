@@ -7,8 +7,11 @@ def get_hrefs(data: Dict):
     all_hrefs = []
     for el in data['items']:
         for elem in el['cells']:
-            all_hrefs.append(f"{scheme}{elem['entity']['code']}-{elem['entity']['models'][0]['code']}")
-    print(all_hrefs)
+            try:
+                all_hrefs.append(f"{scheme}{elem['entity']['code']}-{elem['entity']['models'][0]['code']}")
+            except KeyError:
+                continue
+    # print(all_hrefs)
     random_hrefs = all_hrefs[random.randint(0, len(all_hrefs) - 1)]
-    print(random_hrefs)
+    # print(random_hrefs)
     return random_hrefs

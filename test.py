@@ -3,7 +3,7 @@ import random
 from typing import Dict
 import requests
 
-url = 'https://lime-shop.com/api/section/skirts_midi'
+url = 'https://lime-shop.com/api/section/dzhinsy_flare_and_bootcut'
 
 payload = ""
 headers = {
@@ -50,7 +50,10 @@ def get_hrefs(data: Dict):
     all_hrefs = []
     for el in data['items']:
         for elem in el['cells']:
-            all_hrefs.append(f"{scheme}{elem['entity']['code']}-{elem['entity']['models'][0]['code']}")
+            try:
+                all_hrefs.append(f"{scheme}{elem['entity']['code']}-{elem['entity']['models'][0]['code']}")
+            except KeyError:
+                continue
     print(all_hrefs)
     random_hrefs = all_hrefs[random.randint(0, len(all_hrefs)-1)]
     print(random_hrefs)
@@ -58,10 +61,10 @@ def get_hrefs(data: Dict):
 
 
 decoded_data_man = decode_unicode(data)
-# print(type(decoded_data_man))
+# print(json.dumps(decoded_data_man, ensure_ascii=False, indent=2))
 get_hrefs(decoded_data_man)
 
-# print(json.dumps(decoded_data_man, ensure_ascii=False, indent=2))
+
 
 '''{
   "id": 142,
